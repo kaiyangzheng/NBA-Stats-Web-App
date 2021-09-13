@@ -1,0 +1,68 @@
+{% extends "layouts.html" %}
+{%block content%}
+<body style = "overflow-x: hidden">
+    
+    <h1 class="font-monospace" style = "position: relative; top: 20px; left: 187px">Dashboard</h1>
+    {% if name=='Guest' %}
+    <span class = "font-monospace" style = "position: relative; left: 187px; top: 15px"><a href = "{{url_for('login')}}">Sign in</a> for more personalized content</span>
+    <br>
+    {% else %}
+    <span class = "font-monospace" style = "position: relative; left: 187px; top: 15px">Welcome, {{name}}</span>
+    {%endif%}
+    <h3 class = "font-monospace" style = "position: relative; left: 187px; top: 20px">Page Navigation</h3>
+    <ol class="list-group list-group-numbered" style = "position: relative; width: 30%; left: 187; top: 15px">
+      <a href = "#statistics"><li class="list-group-item">NBA Statistics</li></a>
+      <a href = "#BestPerformance"><li class="list-group-item">Best Performance Yesterday</li></a>
+      <a href = "#BestGame"><li class="list-group-item">Best Game Yesterday</li></a>
+      <a href = "#BestMatchup"><li class="list-group-item">Best Matchup Today</li></a>
+    </ol>
+    <hr style="width: 75%;  margin: auto; position: relative; top: 30px">
+    <h2  class="font-monospace" style="position: relative; left: 187px; top: 35px">NBA Statistics</h2>
+    <div id = "statistics" style = 'display: flex; flex-wrap: wrap'>
+    <div class="card" style="width:  18rem; position: absolute; display: flex; left: 187px; top: 425px">
+        <img src="" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Players</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <div id="loading-hide" style= "width: 35px; height: 35px; display: none; background: url(/static/loadingimage.gif) no-repeat; cursor: wait;">
+          </div>
+          <div id="content-hide">
+            <a href="{{url_for('playerlist')}}" class="btn btn-primary" onclick="loading_hide();">Go somewhere</a>
+          </div>
+        </div>
+    </div>
+  <div class="card" style="width: 18rem; position: absolute; display: flex; left: 537px; top: 425px">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>  
+    <div class="card" style="width: 18rem; position: absolute; display: flex; left: 887px; top: 425px">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+    <div class="card" style="width: 30em; position: absolute; display: flex; left: 187px; top: 675px">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+    </div>
+    <hr id = "BestPerformance" style="width: 75%;  margin: auto; position: relative; top: 500px">
+    <h2 class="font-monospace" style="position: relative; top: 500px; left: 187px;">Best Performance Yesterday</h1>
+    <hr id = "BestGame" style="width: 75%;  margin: auto; position: relative; top: 1000px">
+    <h2 class="font-monospace" style="position: relative; top: 1000px; left: 187px;">Best Game Yesterday</h1>
+    <hr id = "BestMatchup" style="width: 75%;  margin: auto; position: relative; top: 1500px">
+    <h2 class="font-monospace" style="position: relative; top: 1500px; left: 187px;">Best Matchup Today</h1>
+    <hr style="width: 75%;  margin: auto; position: relative; top: 2000px">
+</body>
+
+{%endblock%}

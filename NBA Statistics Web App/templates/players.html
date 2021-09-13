@@ -1,0 +1,85 @@
+{% extends "layouts.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{%block content%}
+<body style = "overflow-x: hidden">
+<h1 class="font-monospace" style = "position: relative; top: 20px; left: 187px">Players</h1>
+<p class="font-monospace" style = "position: relative; top: 20px;  left: 187px">Browse through all active NBA players and view their statistics</p>
+<hr style="width: 75%;  margin: auto; position: relative; top: 13px">
+<h5 class="font-monospace" style = "position: relative; left: 187px; top: 17px">Search By: </h3>
+<div class="container" style = "position: relative; left: 90px; top: 7px">
+    <form method="POST" action="/players">
+
+       {{select_form.hidden_tag()}}
+        <span>{{select_form.search_type.label}}{{select_form.search_type()}}</span>
+        <div id="content">
+            <span>{{select_form.submit(class_="btn btn-outline-primary", onclick = "loading();")}}</span>       
+        </div>
+        <div id="loading" style= "width: 35px; height: 35px; display: none; background: url(/static/loadingimage.gif) no-repeat; cursor: wait;">
+        </div>
+
+    </form>
+</div>
+<hr style="width: 75%;  margin: auto; position: relative;" style = "position: relative; left: 187px; top: 5px"> 
+<div id="searchContainer" style="position: relative; width: 50%; left: 187px; top: 15px">
+<form method = "POST" action = "/players">
+    <div class="input-group">
+        {{search_form.hidden_tag()}}
+        <span>{{search_form.search.label}}{{search_form.search(class_="form-control rounded", style = "width: 250%")}}</span>
+        <div id="content2">
+            <span>{{search_form.submit(class_="btn btn-outline-primary", style = "left: 420%;", onclick = "loading2();")}}</span>
+        </div>
+        <div id="loading2" style= "width: 35px; height: 35px; display: none; background: url(/static/loadingimage.gif) no-repeat; cursor: wait; position: relative; left: 310px; top: 12px">
+        </div>
+    </div>
+</form>
+</div>      
+<form method = "POST" action = "/players">
+    <div style="position: relative; left: 187px">
+        {{reset_form.hidden_tag()}}
+        <div id="content-hide">
+            <span>{{reset_form.submit(class ="btn btn-outline-danger", style = "left: 500%", onclick = "loading_hide();")}}</span>
+        </div>
+        <div id="loading-hide" style= "width: 35px; height: 35px; display: none; background: url(/static/loadingimage.gif) no-repeat; cursor: wait; position: relative;">
+        </div>
+        
+    </div>
+</form>
+{% if select_method == 'Player name'%}
+<div class="row row-cols-1 row-cols-md-4 g-4 pl-0 ml-0" style="position: relative; left: 187; width: 1190px; top: 20px">
+    {% for player in player_list %}
+        <div class="col" style="position: relative;">
+            <div class="card" style="width: 16rem;">
+                <img src="{{player_img_dict[player]}}" class="card-img-top" alt="..."; styles = "width: 50%; height: 50%">
+                <div class="card-body">
+                <h5 class="card-title">{{player}}</h5>
+                <p class="card-text">
+                    Team: {{player_tm_dict[player]}}<br>
+                    Pos: {{player_pos_dict[player]}}<br>
+                    Age: {{player_age_dict[player]}}<br>
+                    Height: {{player_height_dict[player]}}<br>
+                    Weight: {{player_weight_dict[player]}}<br>
+                    Salary: {{player_salary_dict[player]}}<br>
+                </p>
+                <a href="#" class="btn btn-primary">➤</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{%else%}
+<div class="row row-cols-1 row-cols-md-4 g-4 pl-0 ml-0" style="position: relative; left: 187; width: 1190px; top: 20px">
+    {%for team in team_list%}
+    <div class="col" style="position: relative;">
+        <div class="card" style="width: 16rem;">
+            <img src="{{team_img_dict[team]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{team}}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">➤</a>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+{% endif %}
+{%endblock%}
